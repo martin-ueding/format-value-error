@@ -52,7 +52,7 @@ def format(value, error=None, unit=None, lit=None):
             error_dis = error * 10**(difference - error_log)
             exp = value_log
 
-        format_string = "({0:."+str(digits-1)+"f} ± {1:."+str(digits-1)+"f})e{2:+02d}"
+        format_string = "({0:."+str(digits-1)+"f} ± {1:."+str(digits-1)+"f})e{2:+d}"
         parts.append(format_string.format(value_dis, error_dis, exp))
 
     if unit is not None:
