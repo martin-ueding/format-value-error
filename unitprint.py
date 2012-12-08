@@ -34,7 +34,7 @@ def format(value, error=None, unit=None, lit=None):
     parts = []
 
     if error is None:
-        format_string = "{0:."+str(digits-1)+"e}"
+        format_string = "{:."+str(digits-1)+"e}"
         parts.append(format_string.format(value))
     else:
         value_log = int(math.floor(math.log(value, 10)))
@@ -52,14 +52,14 @@ def format(value, error=None, unit=None, lit=None):
             error_dis = error * 10**(difference - error_log)
             exp = value_log
 
-        format_string = "({0:."+str(digits-1)+"f} ± {1:."+str(digits-1)+"f})e{2:+d}"
+        format_string = "({:."+str(digits-1)+"f} ± {:."+str(digits-1)+"f})e{:+d}"
         parts.append(format_string.format(value_dis, error_dis, exp))
 
     if unit is not None:
         parts.append(unit)
 
     if error is not None:
-        parts.append("({0:.0%})".format(error/value))
+        parts.append("({:.0%})".format(error/value))
 
     if lit is not None:
         lit_parts = []
