@@ -63,9 +63,9 @@ def format(value, error=None, unit=None, lit=None):
 
     if lit is not None:
         lit_parts = []
-        lit_parts.append("{:.0%}".format((value-lit)/lit))
+        lit_parts.append("{:+.0%}".format((value-lit)/lit))
         if error is not None:
-            lit_parts.append("{:.1f}σ".format((value-lit)/error))
+            lit_parts.append("{:+.1f}σ".format((value-lit)/error))
         parts.append("[" + ", ".join(lit_parts) + "]")
 
     return ' '.join(parts)
