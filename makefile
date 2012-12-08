@@ -4,9 +4,6 @@ testfiles = $(wildcard *-test.py)
 
 all:
 
-test: $(testfiles)
-	python -m unittest $(testfiles:.py=)
-
 .PHONY: clean
 clean:
 	$(RM) *.class *.jar
