@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2012-2013 Martin Ueding <dev@martin-ueding.de>
 
 import math
 
@@ -12,7 +12,7 @@ digits = 3
 Number of digits to print. This can be overwritten.
 """
 
-def format(value, error=None, unit=None, lit=None):
+def format(value, error=None, unit=None, lit=None, latex=False):
     """
     Formats the given value and error in a human readable form. If an error is
     supplied, it will calculate the relative error. If a literature value is
@@ -53,6 +53,9 @@ def format(value, error=None, unit=None, lit=None):
             exp = value_log
 
         format_string = "({:."+str(digits-1)+"f} ± {:."+str(digits-1)+"f})e{:+d}"
+        if latex:
+            format_string = r"\del{{{:."+str(digits-1)+"f} \pm {:."+str(digits-1)+"f}}} \cdot 10^{{{:d}}}"
+
         parts.append(format_string.format(value_dis, error_dis, exp))
 
     if unit is not None:
@@ -77,3 +80,6 @@ if __name__ == '__main__':
     print format(12.3, 1.23, lit=14.0)
     print format(12.3, 1.23, "V", lit=10.0)
     print format(12.3, lit=10.0)
+
+    print format(12.3, 1.23, latex=True)
+    print format(12.3, 1.23, lit=14.0, latex=True)
