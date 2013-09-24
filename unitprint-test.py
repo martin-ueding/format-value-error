@@ -49,8 +49,7 @@ class TestQuantity(unittest.TestCase):
         self.assertEqual("1.23 +- 1.23", q.to_siunitx())
 
     def test_to_siunitx_3(self):
-        q = unitprint.Quantity(12.3, 1.23)
-        self.assertEqual("1.230 +- 0.123 e1", q.to_siunitx())
+        self.assertEqual("1.230 +- 0.123 e1", unitprint.siunitx(12.3, 1.23))
 
 if __name__ == '__main__':
     unittest.main()

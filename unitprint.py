@@ -49,6 +49,10 @@ class Quantity(object):
             else:
                 return "{} +- {} e{}".format(self.value_mantissa, self.error_mantissa, self.exponent)
 
+def siunitx(value, error=None):
+    q = Quantity(value, error)
+    return q.to_siunitx()
+
 
 def format(value, error=None, unit=None, lit=None, latex=False):
     """
