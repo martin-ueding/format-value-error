@@ -9,5 +9,7 @@ all:
 clean:
 	$(RM) *.class *.jar
 	$(RM) *.o *.out
-	$(RM) *.pyc *.pyo
 	$(RM) *.orig
+	$(RM) *.pyc *.pyo
+	$(RM) -r __pycache__
+	$(RM) -r build
