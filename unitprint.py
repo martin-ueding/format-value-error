@@ -1,25 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # Copyright © 2012-2013 Martin Ueding <dev@martin-ueding.de>
-
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Licensed under The GNU Public License Version 2 (or later)
 
 import math
 
@@ -29,6 +12,43 @@ digits = 3
 """
 Number of digits to print. This can be overwritten.
 """
+
+class Quantity(object):
+    def __init__(self, value, error=None):
+        value_log = int(math.floor(math.log(value, 10)))
+
+        if error is None:
+            self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
+            self.error_mantissa = None
+            self.exponent = value_log
+        else:
+            error_log = int(math.floor(math.log(error, 10)))
+
+            difference = value_log - error_log
+
+            value_dis = value * 10**(- value_log)
+            error_dis = error * 10**(-difference - error_log)
+            exp = value_log
+
+            error_digits = digits - 1 + max(difference, 0)
+            value_digits = error_digits
+
+            self.value_mantissa = ("{:."+str(value_digits)+"f}").format(value_dis)
+            self.error_mantissa = ("{:."+str(error_digits)+"f}").format(error_dis)
+            self.exponent = exp
+
+    def to_siunitx(self):
+        if self.error_mantissa is None:
+            if self.exponent == 0:
+                return "{}".format(self.value_mantissa)
+            else:
+                return "{}e{}".format(self.value_mantissa, self.exponent)
+        else:
+            if self.exponent == 0:
+                return "{} +- {}".format(self.value_mantissa, self.error_mantissa)
+            else:
+                return "{} +- {} e{}".format(self.value_mantissa, self.error_mantissa, self.exponent)
+
 
 def format(value, error=None, unit=None, lit=None, latex=False):
     """
@@ -51,30 +71,6 @@ def format(value, error=None, unit=None, lit=None, latex=False):
 
     parts = []
 
-    if error is None:
-        format_string = "{:."+str(digits-1)+"e}"
-        parts.append(format_string.format(value))
-    else:
-        value_log = int(math.floor(math.log(value, 10)))
-        error_log = int(math.floor(math.log(error, 10)))
-
-        difference = value_log - error_log
-        exp = 0
-
-        if difference >= 0:
-            value_dis = value * 10**(difference - value_log)
-            error_dis = error * 10**(- error_log)
-            exp = error_log
-        else:
-            value_dis = value * 10**(- value_log)
-            error_dis = error * 10**(difference - error_log)
-            exp = value_log
-
-        format_string = "({:."+str(digits-1)+"f} ± {:."+str(digits-1)+"f})e{:+d}"
-        if latex:
-            format_string = r"\del{{{:."+str(digits-1)+"f} \pm {:."+str(digits-1)+"f}}} \cdot 10^{{{:d}}}"
-
-        parts.append(format_string.format(value_dis, error_dis, exp))
 
     if unit is not None:
         parts.append(unit)
@@ -90,14 +86,3 @@ def format(value, error=None, unit=None, lit=None, latex=False):
         parts.append("[" + ", ".join(lit_parts) + "]")
 
     return ' '.join(parts)
-
-if __name__ == '__main__':
-    print format(1.23, 1.23)
-    print format(12.3, 1.23)
-    print format(790e-9, 10e-9, "m")
-    print format(12.3, 1.23, lit=14.0)
-    print format(12.3, 1.23, "V", lit=10.0)
-    print format(12.3, lit=10.0)
-
-    print format(12.3, 1.23, latex=True)
-    print format(12.3, 1.23, lit=14.0, latex=True)
