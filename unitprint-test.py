@@ -39,7 +39,6 @@ class TestQuantity(unittest.TestCase):
         self.assertEqual(q.error_mantissa, "12.30")
         self.assertEqual(q.exponent, 0)
 
-
     def test_to_siunitx_1(self):
         q = unitprint.Quantity(1.23)
         self.assertEqual("1.23", q.to_siunitx())
