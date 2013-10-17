@@ -5,6 +5,9 @@ testfiles = $(wildcard *-test.py)
 
 all:
 
+install:
+	./setup.py install --root "$(DESTDIR)"
+
 .PHONY: clean
 clean:
 	$(RM) *.class *.jar
