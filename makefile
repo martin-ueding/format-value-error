@@ -6,7 +6,7 @@ testfiles = $(wildcard *-test.py)
 all:
 
 install:
-	./setup.py install --prefix "$(DESTDIR)/usr"
+	./setup.py install --root "$(DESTDIR)" --install-layout deb
 
 .PHONY: clean
 clean:
