@@ -50,8 +50,14 @@ class Quantity(object):
                 return "{} +- {} e{}".format(self.value_mantissa, self.error_mantissa, self.exponent)
 
 def siunitx(value, error=None):
-    q = Quantity(value, error)
-    return q.to_siunitx()
+    if hasattr(value, "__iter__"):
+        if error is None:
+            return [Quantity(v, None).to_siunitx() for v in value]
+        else:
+            return [Quantity(v, e).to_siunitx() for v, e in zip(value, error)]
+    else:
+        q = Quantity(value, error)
+        return q.to_siunitx()
 
 
 def format(value, error=None, unit=None, lit=None, latex=False):

@@ -4,6 +4,7 @@
 # Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
 # Licensed under The MIT License
 
+import numpy as np
 import unittest
 
 import unitprint
@@ -49,6 +50,10 @@ class TestQuantity(unittest.TestCase):
 
     def test_to_siunitx_3(self):
         self.assertEqual("1.230 +- 0.123 e1", unitprint.siunitx(12.3, 1.23))
+
+    def test_siunitx_array_loop(self):
+        x = np.array([1, 2, 3])
+        out = unitprint.siunitx(x)
 
 if __name__ == '__main__':
     unittest.main()
