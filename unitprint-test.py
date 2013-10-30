@@ -51,6 +51,12 @@ class TestQuantity(unittest.TestCase):
     def test_to_siunitx_3(self):
         self.assertEqual("1.230 +- 0.123 e1", unitprint.siunitx(12.3, 1.23))
 
+    def test_negative(self):
+        q = unitprint.Quantity(-1.23, 12.3)
+        self.assertEqual(q.value_mantissa, "-1.23")
+        self.assertEqual(q.error_mantissa, "12.30")
+        self.assertEqual(q.exponent, 0)
+
     def test_siunitx_array_loop(self):
         x = np.array([1, 2, 3])
         out = unitprint.siunitx(x)
