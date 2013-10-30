@@ -15,7 +15,7 @@ Number of digits to print. This can be overwritten.
 
 class Quantity(object):
     def __init__(self, value, error=None):
-        value_log = int(math.floor(math.log(value, 10)))
+        value_log = int(math.floor(math.log(math.abs(value), 10)))
 
         if error is None:
             self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
