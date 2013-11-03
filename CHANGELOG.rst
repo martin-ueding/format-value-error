@@ -5,7 +5,8 @@ Changelog
 #########
 
 v1.2.2
-    - Work with zero value
+    - Work with zero value and error. This raised an exception previously since
+      the logarithm is calculated of both value and error.
 
 v1.2.1
     - Work with negative numbers
