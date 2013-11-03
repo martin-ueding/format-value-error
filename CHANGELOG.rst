@@ -4,6 +4,9 @@
 Changelog
 #########
 
+v1.3
+    - Add ``error_digits`` that are different from the regular ``digits``.
+
 v1.2.2.1
     - Dummy version to get an automatic backport.
 
