@@ -4,6 +4,9 @@
 Changelog
 #########
 
+v1.2.2.1
+    - Dummy version to get an automatic backport.
+
 v1.2.2
     - Work with zero value and error. This raised an exception previously since
       the logarithm is calculated of both value and error.
