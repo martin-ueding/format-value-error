@@ -48,6 +48,17 @@ class Quantity(object):
                 return "{} +- {} e{}".format(self.value_mantissa, self.error_mantissa, self.exponent)
 
 def siunitx(value, error=None, **kwargs):
+    '''
+    Convenience function for generating output for the LaTeX siunitx package.
+
+    The given parameters will be used to generate a Quantity object. If
+    ``value`` is an iterable object, a Quantity object will be generated for
+    each item. That way, it is possible to use this function on two numpy.array
+    instances.
+
+    :type value: int or list
+    :type error: int or list
+    '''
     if hasattr(value, "__iter__"):
         if error is None:
             return [Quantity(v, None, **kwargs).to_siunitx() for v in value]
@@ -92,3 +103,5 @@ def format(value, error=None, unit=None, lit=None, latex=False):
         parts.append("[" + ", ".join(lit_parts) + "]")
 
     return ' '.join(parts)
+
+# vim: spell
