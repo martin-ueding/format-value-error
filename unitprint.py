@@ -5,9 +5,6 @@
 # Licensed under The MIT License
 
 import math
-import logging
-
-logger = logging.getLogger(__name__)
 
 __docformat__ = "restructuredtext en"
 
