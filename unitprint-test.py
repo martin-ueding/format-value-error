@@ -61,5 +61,10 @@ class TestQuantity(unittest.TestCase):
         x = np.array([1, 2, 3])
         out = unitprint.siunitx(x)
 
+    def test_zero(self):
+        q = unitprint.Quantity(0)
+        self.assertEqual(q.value_mantissa, "0.00")
+        self.assertEqual(q.exponent, 0)
+
 if __name__ == '__main__':
     unittest.main()
