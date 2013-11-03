@@ -18,15 +18,12 @@ class Quantity(object):
         else:
             value_log = int(math.floor(math.log(abs(value), 10)))
 
-        if error is None:
+        if error is None or error == 0:
             self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
             self.error_mantissa = None
             self.exponent = value_log
         else:
-            if error == 0:
-                error_log = 0
-            else:
-                error_log = int(math.floor(math.log(error, 10)))
+            error_log = int(math.floor(math.log(abs(error), 10)))
 
             difference = value_log - error_log
 
