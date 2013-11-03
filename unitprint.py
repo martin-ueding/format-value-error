@@ -4,6 +4,18 @@
 # Copyright © 2012-2013 Martin Ueding <dev@martin-ueding.de>
 # Licensed under The MIT License
 
+'''
+Pretty prints numerical value and error pairs.
+
+This is especially handy for lab reports or similar written work where a lot of
+measurements are presented. The siunitx() function will generate output
+suitable for the LaTeX package siunitx and its ``\\SI`` and ``\\num`` commands.
+
+It will check the following:
+
+- Value and error have the same number of significant digits.
+'''
+
 import math
 
 __docformat__ = "restructuredtext en"
