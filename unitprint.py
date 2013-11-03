@@ -5,12 +5,18 @@
 # Licensed under The MIT License
 
 import math
+import logging
+
+logger = logging.getLogger(__name__)
 
 __docformat__ = "restructuredtext en"
 
 class Quantity(object):
     def __init__(self, value, error=None, digits=3, error_digits=1):
-        value_log = int(math.floor(math.log(abs(value), 10)))
+        if value == 0:
+            value_log = 0
+        else:
+            value_log = int(math.floor(math.log(abs(value), 10)))
 
         if error is None:
             self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
@@ -44,14 +50,14 @@ class Quantity(object):
             else:
                 return "{} +- {} e{}".format(self.value_mantissa, self.error_mantissa, self.exponent)
 
-def siunitx(value, error=None):
+def siunitx(value, error=None, **kwargs):
     if hasattr(value, "__iter__"):
         if error is None:
-            return [Quantity(v, None).to_siunitx() for v in value]
+            return [Quantity(v, None, **kwargs).to_siunitx() for v in value]
         else:
-            return [Quantity(v, e).to_siunitx() for v, e in zip(value, error)]
+            return [Quantity(v, e, **kwargs).to_siunitx() for v, e in zip(value, error)]
     else:
-        q = Quantity(value, error)
+        q = Quantity(value, error, **kwargs)
         return q.to_siunitx()
 
 
