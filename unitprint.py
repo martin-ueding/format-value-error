@@ -60,7 +60,6 @@ def siunitx(value, error=None, **kwargs):
         q = Quantity(value, error, **kwargs)
         return q.to_siunitx()
 
-
 def format(value, error=None, unit=None, lit=None, latex=False):
     """
     Formats the given value and error in a human readable form. If an error is
@@ -81,7 +80,6 @@ def format(value, error=None, unit=None, lit=None, latex=False):
     """
 
     parts = []
-
 
     if unit is not None:
         parts.append(unit)
