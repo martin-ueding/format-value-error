@@ -31,7 +31,7 @@ class Quantity(object):
             error_dis = error * 10**(-difference - error_log)
             exp = value_log
 
-            error_digits = digits - 1 + max(difference, 0)
+            error_digits = error_digits - 1 + max(difference, 0)
             value_digits = error_digits
 
             self.value_mantissa = ("{:."+str(value_digits)+"f}").format(value_dis)
