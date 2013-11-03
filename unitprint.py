@@ -23,7 +23,10 @@ class Quantity(object):
             self.error_mantissa = None
             self.exponent = value_log
         else:
-            error_log = int(math.floor(math.log(error, 10)))
+            if error == 0:
+                error_log = 0
+            else:
+                error_log = int(math.floor(math.log(error, 10)))
 
             difference = value_log - error_log
 
