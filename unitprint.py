@@ -8,13 +8,8 @@ import math
 
 __docformat__ = "restructuredtext en"
 
-digits = 3
-"""
-Number of digits to print. This can be overwritten.
-"""
-
 class Quantity(object):
-    def __init__(self, value, error=None):
+    def __init__(self, value, error=None, digits=3, error_digits=1):
         value_log = int(math.floor(math.log(abs(value), 10)))
 
         if error is None:

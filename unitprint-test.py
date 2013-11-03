@@ -11,7 +11,7 @@ import unitprint
 
 class TestQuantity(unittest.TestCase):
     def test_init_1(self):
-        q = unitprint.Quantity(1.23)
+        q = unitprint.Quantity(1.23, digits=3)
         self.assertEqual(q.value_mantissa, "1.23")
         self.assertIs(None, q.error_mantissa)
         self.assertEqual(q.exponent, 0)
