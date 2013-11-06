@@ -4,6 +4,9 @@
 Changelog
 #########
 
+v1.4
+    - Allow hanging digits for a more human representation
+
 v1.3
     - Add ``error_digits`` that are different from the regular ``digits``.
 
