@@ -21,16 +21,26 @@ import math
 __docformat__ = "restructuredtext en"
 
 class Quantity(object):
-    def __init__(self, value, error=None, digits=3, error_digits=1):
+    def __init__(self, value, error=None, digits=3, error_digits=1, allowed_hang=3):
+        '''
+        :param allowed_hang: If the value exponent is below or equal to this
+        number, it will printed like that. So a 100 is preserved if this is set
+        to 3. A 1000 will be converted to ``1.00e3``.
+        '''
         if value == 0:
             value_log = 0
         else:
             value_log = int(math.floor(math.log(abs(value), 10)))
 
         if error is None or error == 0:
-            self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
-            self.error_mantissa = None
-            self.exponent = value_log
+            if abs(value_log) > allowed_hang:
+                self.value_mantissa = ("{:."+str(digits-1)+"f}").format(value * 10**(- value_log))
+                self.error_mantissa = None
+                self.exponent = value_log
+            else:
+                self.value_mantissa = ("{:."+str(digits-1 - value_log)+"f}").format(value)
+                self.error_mantissa = None
+                self.exponent = 0
         else:
             error_log = int(math.floor(math.log(abs(error), 10)))
 
@@ -40,12 +50,18 @@ class Quantity(object):
             error_dis = error * 10**(-difference - error_log)
             exp = value_log
 
-            error_digits = error_digits - 1 + max(difference, 0)
-            value_digits = error_digits
+            if abs(value_log) > allowed_hang:
+                here_digits = error_digits - 1 + max(difference, 0)
 
-            self.value_mantissa = ("{:."+str(value_digits)+"f}").format(value_dis)
-            self.error_mantissa = ("{:."+str(error_digits)+"f}").format(error_dis)
-            self.exponent = exp
+                self.value_mantissa = ("{:."+str(here_digits)+"f}").format(value_dis)
+                self.error_mantissa = ("{:."+str(here_digits)+"f}").format(error_dis)
+                self.exponent = exp
+            else:
+                here_digits = max(error_digits - 1 -error_log, 0)
+
+                self.value_mantissa = ("{:."+str(here_digits)+"f}").format(value)
+                self.error_mantissa = ("{:."+str(here_digits)+"f}").format(error)
+                self.exponent = 0
 
     def to_siunitx(self):
         if self.error_mantissa is None:
