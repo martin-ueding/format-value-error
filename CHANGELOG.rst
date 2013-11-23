@@ -4,6 +4,9 @@
 Changelog
 #########
 
+v1.4.1
+    - Fix error on four digit number.
+
 v1.4
     - Allow hanging digits for a more human representation
 
