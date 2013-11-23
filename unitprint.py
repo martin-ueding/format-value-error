@@ -38,7 +38,7 @@ class Quantity(object):
                 self.error_mantissa = None
                 self.exponent = value_log
             else:
-                self.value_mantissa = ("{:."+str(digits-1 - value_log)+"f}").format(value)
+                self.value_mantissa = ("{:."+str(max(digits-1 - value_log, 0))+"f}").format(value)
                 self.error_mantissa = None
                 self.exponent = 0
         else:
