@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2013-2014 Martin Ueding <dev@martin-ueding.de>
 # Licensed under The MIT License
 
 import numpy as np
@@ -74,6 +74,12 @@ class TestQuantity(unittest.TestCase):
         q = unitprint.Quantity(0)
         self.assertEqual(q.value_mantissa, "0.00")
         self.assertEqual(q.exponent, 0)
+
+    def test_zero_error(self):
+        unitprint.siunitx(1.0, 0.0)
+
+    def test_negative_error(self):
+        unitprint.siunitx(1.0, -0.5)
 
 if __name__ == '__main__':
     unittest.main()

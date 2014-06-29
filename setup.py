@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Copyright © 2012-2013 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2012-2014 Martin Ueding <dev@martin-ueding.de>
 # Licensed under The MIT License
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(
     author = "Martin Ueding",
@@ -15,4 +15,5 @@ setup(
     py_modules = ["unitprint"],
     url = "http://martin-ueding.de/projects/python-unitprint",
     version = "1.0",
+    test_suite='unitprint-test',
 )
