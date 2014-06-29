@@ -2,3 +2,4 @@ unitprint-test.pyc
 unitprint.pyc
 build/
 __pycache__/
+unitprint.egg-info/
