@@ -1,8 +1,13 @@
-..  Copyright © 2013 Martin Ueding <dev@martin-ueding.de>
+..  Copyright © 2013, 2015 Martin Ueding <dev@martin-ueding.de>
 
 #########
 Changelog
 #########
+
+v1.4.2
+    Released: 2015-05-15
+
+    - Remove makefile
 
 v1.4.1
     - Fix error on four digit number.
