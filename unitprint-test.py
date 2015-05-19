@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Copyright © 2013-2014 Martin Ueding <dev@martin-ueding.de>
+# Copyright © 2013-2015 Martin Ueding <dev@martin-ueding.de>
 # Licensed under The MIT License
 
-import numpy as np
 import unittest
+
+import numpy as np
 
 import unitprint
 
