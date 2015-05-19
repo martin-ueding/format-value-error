@@ -4,6 +4,11 @@
 Changelog
 #########
 
+v1.4.3
+    Released: 2015-05-19
+
+    - State NumPy dependency in the ``setup.py``
+
 v1.4.2
     Released: 2015-05-15
 
