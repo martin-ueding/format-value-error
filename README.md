@@ -27,10 +27,18 @@ floating point value and error. The “error digits” controls the number of
 significant digits in the error, the number of digits of the value is derived
 from this.
 
+The “allowed hang” option specifies the maximum number of zeros that are
+allowed before before the mantissa-plus-exponent format is used.
+
 ## Examples
+
+The following show the results with the default parameters of “error digits” of
+1 and “allowed hang” of 3.
 
 | Value     | Error     | Formatted          | siunitx rendered         |
 | --------- | --------- | ------------------ | ------------------------ |
 | `123.4`   | `2.34`    | `123 +- 2`         | `123(2)`                 |
 | `-123.4`  | `0.34`    | `-123.4 +- 0.3`    | `-123.4(3)`              |
 | `-0.5e-9` | `0.04e-9` | `-5.0 +- 0.4 e-10` | `-5.0(4) \cdot 10^{-10}` |
+
+<!-- vim: spell tw=79 -->
