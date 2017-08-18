@@ -1,4 +1,5 @@
 # Copyright © 2017 Martin Ueding <dev@martin-ueding.de>
+# Licensed under the MIT/Expat license.
 
 format.val.err <- function(value, error, error.digits = 1, allowed.hang = 3) {
     if (value == 0) {

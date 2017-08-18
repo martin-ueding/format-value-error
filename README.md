@@ -10,11 +10,15 @@ depending on the package options chosen. The number of digits must match. If
 one just dumps in floating point numbers from a computer program, they will
 likely not have the same number of digits. Also the 
 
+## License
+
+[MIT/Expat](https://opensource.org/licenses/MIT)
+
 ## Implementations
 
-There is a Python 3 implementation in `Python/unitprint2.py`.
-
-An R implementation is in `R/unitprint.R`.
+- Octave
+- Python 3
+- R
 
 ## Usage
 
